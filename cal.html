@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomberman Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.getElementById("gameCanvas");
+            const ctx = canvas.getContext("2d");
+
+            const blockSize = 40;
+            const playerSize = 30;
+            let playerX = 50;
+            let playerY = 50;
+
+            function drawPlayer() {
+                ctx.fillStyle = "blue";
+                ctx.fillRect(playerX, playerY, playerSize, playerSize);
+            }
+
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function draw() {
+                clearCanvas();
+                drawPlayer();
+            }
+
+            document.addEventListener("keydown", function(event) {
+                const key = event.key;
+                if (key === "ArrowRight" && playerX + playerSize < canvas.width) {
+                    playerX += blockSize;
+                } else if (key === "ArrowLeft" && playerX > 0) {
+                    playerX -= blockSize;
+                } else if (key === "ArrowDown" && playerY + playerSize < canvas.height) {
+                    playerY += blockSize;
+                } else if (key === "ArrowUp" && playerY > 0) {
+                    playerY -= blockSize;
+                } else if (key === " z") {
+                    placeBomb();
+                }
+
+                draw();
+            });
+
+            function placeBomb() {
+                // Implementation of placing a bomb
+                // This is where you can add functionality to create a bomb object and place it in the game world
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>
